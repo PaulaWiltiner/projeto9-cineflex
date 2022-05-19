@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 
-export default function Topo() {
+export default function Header() {
 
   return(
-    <div className='topo'> 
+    <div className='header'> 
 
     </div>
 )
