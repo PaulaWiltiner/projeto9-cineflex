@@ -7,12 +7,14 @@ export default function SeatsList() {
   //https://mock-api.driven.com.br/api/v5/cineflex/showtimes/ID_DA_SESSAO/seats
 
 	useEffect(() => {
-		const promise = axios.get("https://mock-api.driven.com.br/api/v5/cineflex/showtimes/1/seats");
+		const promise = axios.get("https://mock-api.driven.com.br/api/v5/cineflex/showtimes/2/seats");
 
 		promise.then(response => {
 			setItems(response.data);
 		});
 	}, []);
+
+
 
  
 
