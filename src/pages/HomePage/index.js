@@ -14,7 +14,7 @@ export default function HomePage() {
       <Titulo>Selecione o filme</Titulo>
       <Filmes statusLoad={setLoad}/>
       <Loading>
-      {load ? <img src={loading} alt=''/> : ''}
+         {load ? <img src={loading} alt=''/> : ''}
       </Loading>
     </>
 )

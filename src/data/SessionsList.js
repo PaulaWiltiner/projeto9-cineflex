@@ -6,35 +6,49 @@ import { Link } from "react-router-dom";
 export default function SessionsList(props) {
 
 
-	const {idApiMovie:idMovie, statusLoad:setLoad, setNome:setNomeMovie,setImg:setURLMovie } = props;
+	const {
+		idApiMovie:idMovie, 
+		statusLoad:setLoad, 
+		setName:setNameMovie,
+		setImg:setURLMovie 
+	} = props;
+	
 	const [items, setItems] = useState([]);
+
+	function listState(items){
+		setItems(items);
+		setLoad(false);
+		setNameMovie(items.title);
+		setURLMovie(items.posterURL);
+	}
 	
 	useEffect(() => {
 		const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${idMovie}/showtimes`);
 
 		promise.then(response => {
-			setItems(response.data);
+			listState(response.data);
 			
 		});
 	}, []);
 
-	if(items.length!==0){
-		setLoad(false);
-		setNomeMovie(items.title);
-		setURLMovie(items.posterURL);
-	
-	}
+
 
 	return (
 		<>
 			{ items.length!==0 ?
 				items.days.map( (session,index) => 
 					<Schedule id={session.id} key={index}>
+
 						<p>{session.weekday} - {session.date}</p>
+
 						<ButtonList>
-						{session.showtimes.map( (time,index) => 
-							<Link to={`/seatspage/${time.id}`} ><Button >{time.name}</Button></Link>)}
+						{session.showtimes.map( (time) => 
+							<Link to={`/seatspage/${time.id}`} >
+								<Button >{time.name}</Button>
+							</Link>)
+						}
 						</ButtonList>
+
 					</Schedule>)
 				: ""
 				}

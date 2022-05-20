@@ -12,8 +12,12 @@ function ComponentsSeats(){
 
   return(
     <>
+
     <Form />
-    <Link to='/successpage' ><Button>Reservar assento(s)</Button></Link>
+    <Link to='/successpage' >
+      <Button>Reservar assento(s)</Button>
+    </Link>
+
     </>
   )
 }
@@ -23,11 +27,11 @@ export default function SeatsPage() {
   const {idSession} = useParams();
 
   const [load, setLoad] = useState(true);
-  const [nomeMovie,setNomeMovie]=useState('');
+  const [nameMovie,setNameMovie]=useState('');
   const [URL,setURLMovie]=useState('');
   const [schedule,setSchedule]=useState({day:'',schedule:''});
-   console.log('ola')
-
+   
+  console.log(nameMovie,URL)
 
   return(
     <> 
@@ -36,7 +40,14 @@ export default function SeatsPage() {
       
       <SeatsChoice>
         
-        <Seats idApiSession={idSession} statusLoad={setLoad} setNome={setNomeMovie} setImg={setURLMovie} setDay={setSchedule} loadStatus={load} />
+        <Seats 
+          idApiSession={idSession} 
+          statusLoad={setLoad} 
+          setName={setNameMovie} 
+          setImg={setURLMovie} 
+          setDay={setSchedule} 
+          loadStatus={load}
+        />
         
   
         {load ? 
@@ -48,7 +59,13 @@ export default function SeatsPage() {
         }
 
       </SeatsChoice>
-      <Footer name={nomeMovie} time={schedule} posterURL={URL} />
+
+      <Footer 
+        name={nameMovie} 
+        time={schedule} 
+        posterURL={URL}
+      />
+
     </>
 )
 } 

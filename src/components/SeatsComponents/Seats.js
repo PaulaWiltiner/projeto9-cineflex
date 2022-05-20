@@ -8,12 +8,28 @@ export default function Seats(props) {
   const unavailable= {color:'#FBE192', border:'#F7C52B'};
   const select = {color:'#8DD7CF', border:'#1AAE9E'};
 
-  const {idApiSession:idSession, statusLoad:setLoad, setNome:setNomeMovie, setImg:setURLMovie , setDay:setSchedule, loadStatus:load} = props;
+  const {
+    idApiSession:idSession, 
+    statusLoad:setLoad, 
+    setName:setNameMovie, 
+    setImg:setURLMovie , 
+    setDay:setSchedule, 
+    loadStatus:load
+  } = props;
 
   return(
     <SeatPanel>
+      
       <SeatsOption>
-        <SeatsList idApiSession={idSession} statusLoad={setLoad} setNome={setNomeMovie} setImg={setURLMovie} setDay={setSchedule}  />
+
+        <SeatsList 
+          idApiSession={idSession} 
+          statusLoad={setLoad} 
+          setName={setNameMovie} 
+          setImg={setURLMovie} 
+          setDay={setSchedule}  
+        />
+
       </SeatsOption>
 
       {load ? '' :

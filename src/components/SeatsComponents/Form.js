@@ -8,7 +8,7 @@ export default function Form() {
       ...form,
       [e.target.name]: e.target.value,
     }) 
-    console.log(form)
+
   }
 
   const [form, setForm] = React.useState({
@@ -21,11 +21,23 @@ export default function Form() {
     <DivForm>
       <DivInput>
         <p>Nome do comprador:</p>
-        <input type="text" placeholder='Digite o seu nome...' name="description" onChange={handleForm} value={form.description}/>
+        <input 
+          type="text" 
+          placeholder='Digite o seu nome...' 
+          name="description" 
+          onChange={handleForm} 
+          value={form.description}
+        />
       </DivInput>
       <DivInput>
         <p>CPF do comprador:</p>
-        <input placeholder='Digite o seu CPF...' type="text" name="name" onChange={handleForm} value={form.name}/>
+        <input 
+          placeholder='Digite o seu CPF...'
+          type="text" 
+          name="name" 
+          onChange={handleForm} 
+          value={form.name}
+        />
       </DivInput>
     </DivForm>
   )

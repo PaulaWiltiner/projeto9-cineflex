@@ -3,12 +3,22 @@ import SessionsList from '../../data/SessionsList'
 
 export default function Time(props) {
 
-  const {idApiMovie:idMovie, statusLoad:setLoad, setNome:setNomeMovie, setImg:setURLMovie } = props;
+  const {
+    idApiMovie:idMovie, 
+    statusLoad:setLoad, 
+    setName:setNameMovie, 
+    setImg:setURLMovie 
+  } = props;
 
   return(
     <DivSchedules>
 
-      <SessionsList idApiMovie={idMovie} statusLoad={setLoad} setNome={setNomeMovie} setImg={setURLMovie} />
+      <SessionsList 
+        idApiMovie={idMovie} 
+        statusLoad={setLoad} 
+        setName={setNameMovie} 
+        setImg={setURLMovie} 
+      />
         
     </DivSchedules>
   )

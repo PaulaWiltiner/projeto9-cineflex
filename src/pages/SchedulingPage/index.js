@@ -10,19 +10,32 @@ export default function SchedulingPage() {
 
   const { idMovie} = useParams();
 
-  const [nomeMovie,setNomeMovie]=useState('');
+  const [nameMovie,setNameMovie]=useState('');
   const [URL,setURLMovie]=useState('');
   const [load, setLoad] = useState(true);
 
   return(
     < > 
       <Header />
+
       <Titulo>Selecione o filme</Titulo>
-      <Time idApiMovie={idMovie} statusLoad={setLoad} setNome={setNomeMovie} setImg={setURLMovie} />
+
+      <Time 
+        idApiMovie={idMovie} 
+        statusLoad={setLoad}
+        setName={setNameMovie} 
+        setImg={setURLMovie} 
+      />
+
       <Loading>
         {load ? <img src={loading} alt=''/> : ''}
       </Loading>
-      <Footer name={nomeMovie} time={{day:'',schedule:''}} posterURL={URL} />
+
+      <Footer 
+        name={nameMovie} 
+        time={{day:'',schedule:''}} 
+        posterURL={URL} 
+      />
       
 
     </>

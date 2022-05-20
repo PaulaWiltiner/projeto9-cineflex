@@ -8,33 +8,58 @@ function ButtonItem({seat,index}){
 	const available= {color:'#C3CFD9', border:'#808F9D'};
   const unavailable= {color:'#FBE192', border:'#F7C52B'};
 	if(seat.isAvailable){
-		return (<ButtonSeat id={seat.id} key={index} color={available.color} border={available.border} >{seat.name}</ButtonSeat>)
+		return (
+			<ButtonSeat 
+				id={seat.id} 
+				key={index} 
+				color={available.color} 
+				border={available.border} >{seat.name}</ButtonSeat>
+				)
 	}else{
-		return (<ButtonSeat id={seat.id} key={index} color={unavailable.color} border={unavailable.border} >{seat.name}</ButtonSeat>)}
+		return (
+			<ButtonSeat 
+				id={seat.id}
+				key={index} 
+				color={unavailable.color} 
+				border={unavailable.border} >{seat.name}</ButtonSeat>
+				)
+			}
 }
 
 export default function SeatsList(props) {
 
   
-	const {idApiSession:idSession, statusLoad:setLoad, setNome:setNomeMovie, setImg:setURLMovie , setDay:setSchedule} = props;
+	const { 
+		idApiSession:idSession, 
+		statusLoad:setLoad, 
+		setName:setNameMovie, 
+		setImg:setURLMovie , 
+		setDay:setSchedule
+	} = props;
+
+	function listState(items){
+		setItems(items);
+		setLoad(false);
+		setNameMovie(items.movie.title);
+		setURLMovie(items.movie.posterURL);
+		const listTime= {day:items.day.weekday,schedule:items.name};
+		setSchedule(listTime);
+	}
+
 	const [items, setItems] = useState([]);
-	
+
 	useEffect(() => {
+
 		const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSession}/seats`);
 
 		promise.then(response => {
-			setItems(response.data);
+			listState(response.data)
 			
 		});
-	}, [idSession]);
+		
+	 }, []);
 
-	if(items.length!==0 ){
-		setLoad(false);
-		setNomeMovie(items.movie.title);
-		setURLMovie(items.movie.posterURL);
-		const listaTime= {day:items.day.weekday,schedule:items.name};
-		setSchedule(listaTime);
-	}
+
 
 
 	return (
