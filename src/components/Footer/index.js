@@ -1,16 +1,18 @@
 import styled from 'styled-components';
 
 
-export default function FooterPage() {
+export default function FooterPage(props) {
+
+  const {name,time,posterURL} = props;
 
   return(
     <DivFooter>
       <ImageFooter>
-        <img src='https://images-na.ssl-images-amazon.com/images/I/812egX6Xv5L.jpg' alt=''/>
+        <img src={posterURL} alt=''/>
       </ImageFooter>
       <TextFooter>
-        <p>Enola Holmes</p>
-        <p>Quinta-feira - 15:00</p>
+        <p>{name}</p>
+        <p>{time.day} {time.schedule}</p>
       </TextFooter>
     </DivFooter>
   )
