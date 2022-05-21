@@ -19,6 +19,7 @@ export default function Seats(props) {
     setSeat,
     listNameSeat,
     setNameSeat,
+    setdate
   } = props;
 
   return(
@@ -36,6 +37,7 @@ export default function Seats(props) {
           setSeat={setSeat}
           listNameSeat={listNameSeat}
           setNameSeat={setNameSeat}
+          setdate={setdate}
         />
 
       </SeatsOption>

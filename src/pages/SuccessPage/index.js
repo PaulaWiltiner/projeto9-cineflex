@@ -3,7 +3,7 @@ import Header from '../../components/Header'
 import Resume from '../../components/SuccessComponents/Resume'
 import { Link } from "react-router-dom";
 
-export default function SuccessPage({form,name,time ,listNameSeat }) {
+export default function SuccessPage({form,name,time ,date,listNameSeat }) {
 
   return(
     <>
@@ -13,6 +13,7 @@ export default function SuccessPage({form,name,time ,listNameSeat }) {
          form={form}  
          name={name} 
          time={time} 
+         date={date}
          listNameSeat={listNameSeat} 
       />
       <DivButton>

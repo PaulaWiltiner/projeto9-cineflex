@@ -50,6 +50,7 @@ export default function SeatsPage() {
   const [nameMovie,setNameMovie]=useState('');
   const [URL,setURLMovie]=useState('');
   const [schedule,setSchedule]=useState({day:'',schedule:''});
+  const [date,setdate]=useState('');
   const [listSeat, setSeat] = useState([]);
   const [listNameSeat, setNameSeat] = useState([]);
   const [changePage, setChangePage] = useState(true);
@@ -75,6 +76,7 @@ export default function SeatsPage() {
                 setSeat={setSeat}
                 listNameSeat={listNameSeat}
                 setNameSeat={setNameSeat}
+                setdate={setdate}
               />
               
         
@@ -105,6 +107,7 @@ export default function SeatsPage() {
               form={form}  
               name={nameMovie} 
               time={schedule} 
+              date={date}
               listNameSeat={listNameSeat} 
             />
             

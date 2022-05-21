@@ -20,7 +20,8 @@ export default function SeatsList(props) {
 		listSeat,
 		setSeat,
 		listNameSeat,
-		setNameSeat
+		setNameSeat,
+		setdate
 	} = props;
 
 
@@ -76,6 +77,7 @@ export default function SeatsList(props) {
 		setURLMovie(items.movie.posterURL);
 		const listTime= {day:items.day.weekday,schedule:items.name};
 		setSchedule(listTime);
+		setdate(items.day.date)
 	}
 
 	

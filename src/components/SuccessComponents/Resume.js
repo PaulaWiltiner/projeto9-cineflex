@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
-export default function Resume({form,name,time ,listNameSeat }) {
+export default function Resume({form,name,time ,date,listNameSeat }) {
+
+  function formataCPF(cpf){
+    cpf = cpf.replace(/[^\d]/g, "");
+    
+    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+  }
 
   return(
     <>
@@ -8,7 +14,7 @@ export default function Resume({form,name,time ,listNameSeat }) {
           <h2>Filme e sessão</h2>
           <div>
             <p>{name}</p>
-            <p>{time.day} {time.schedule}</p>
+            <p>{date} {time.schedule}</p>
           </div>
         </TextSuccess>
         <TextSuccess>
@@ -23,7 +29,7 @@ export default function Resume({form,name,time ,listNameSeat }) {
           <h2>Comprador</h2>
           <div>
             <p>Nome: {form.name}</p>
-            <p>CPF: {form.cpf}</p>
+            <p>CPF: {formataCPF(form.cpf)}</p>
           </div>
         </TextSuccess>
       </>
