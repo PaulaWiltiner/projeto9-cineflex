@@ -1,42 +1,74 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import React from 'react';
 
 
-function ButtonItem({seat,index}){
-
-	const available= {color:'#C3CFD9', border:'#808F9D'};
-  const unavailable= {color:'#FBE192', border:'#F7C52B'};
-	if(seat.isAvailable){
-		return (
-			<ButtonSeat 
-				id={seat.id} 
-				key={index} 
-				color={available.color} 
-				border={available.border} >{seat.name}</ButtonSeat>
-				)
-	}else{
-		return (
-			<ButtonSeat 
-				id={seat.id}
-				key={index} 
-				color={unavailable.color} 
-				border={unavailable.border} >{seat.name}</ButtonSeat>
-				)
-			}
-}
 
 export default function SeatsList(props) {
 
-  
+	const select = {color:'#8DD7CF', border:'#1AAE9E'};
+	const available= {color:'#C3CFD9', border:'#808F9D'};
+  const unavailable= {color:'#FBE192', border:'#F7C52B'};
+
 	const { 
 		idApiSession:idSession, 
 		statusLoad:setLoad, 
 		setName:setNameMovie, 
 		setImg:setURLMovie , 
-		setDay:setSchedule
+		setDay:setSchedule,
+		listSeat,
+		setSeat,
+		listNameSeat,
+		setNameSeat
 	} = props;
 
+
+	function handleButton (elem,status,name) {
+		if(status){
+			const listCont=[...listSeat]
+			const listName=[...listNameSeat]
+			let cont=0;
+			if(listCont.length===0){
+				setSeat([
+					...listSeat,
+					elem
+				]) 
+				setNameSeat([
+					...listNameSeat,
+					name
+				]) 
+			}
+			for(let i=0;i<=listCont.length-1;i++){
+				
+				if(listCont[i]===elem){
+					listCont.splice(i, 1);
+					listName.splice(i, 1);
+					setSeat([
+							...listCont
+						]) 
+					setNameSeat([
+						...listName
+					]) 
+					i=listCont.length+1;
+					cont=1;
+					}
+				if(i===listCont.length-1 && cont===0){
+					setSeat([
+						...listCont,
+						elem
+					]) 
+					setNameSeat([
+						...listNameSeat,
+						name
+					]) 
+				}
+			}
+		}                
+	}
+
+
+	
 	function listState(items){
 		setItems(items);
 		setLoad(false);
@@ -45,6 +77,8 @@ export default function SeatsList(props) {
 		const listTime= {day:items.day.weekday,schedule:items.name};
 		setSchedule(listTime);
 	}
+
+	
 
 	const [items, setItems] = useState([]);
 
@@ -68,7 +102,37 @@ export default function SeatsList(props) {
 
 				items.seats.map( (seat,index) => 
 
-				<ButtonItem key={index} seat={seat} index={index} />)
+					{
+						let {color,border} = select;
+						if(seat.isAvailable && listSeat.indexOf(seat.id)===-1){
+							color = available.color;
+							border = available.border;
+						}
+						if(seat.isAvailable===false){
+							color = unavailable.color;
+							border = unavailable.border;
+						}
+
+						return(
+							
+							<ButtonSeat 
+								id={seat.id}
+								key={index} 
+								color={color} 
+								border={border} 
+								status={seat.isAvailable}
+								onClick={()=>handleButton(seat.id,seat.isAvailable,seat.name)} 
+								>
+									{seat.name}
+							</ButtonSeat>
+
+						
+							)
+					
+					}
+				
+				)
+				
 
 				: ""
 

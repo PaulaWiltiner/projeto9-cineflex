@@ -14,12 +14,16 @@ export default function Seats(props) {
     setName:setNameMovie, 
     setImg:setURLMovie , 
     setDay:setSchedule, 
-    loadStatus:load
+    loadStatus:load,
+    listSeat,
+    setSeat,
+    listNameSeat,
+    setNameSeat,
   } = props;
 
   return(
     <SeatPanel>
-      
+
       <SeatsOption>
 
         <SeatsList 
@@ -27,7 +31,11 @@ export default function Seats(props) {
           statusLoad={setLoad} 
           setName={setNameMovie} 
           setImg={setURLMovie} 
-          setDay={setSchedule}  
+          setDay={setSchedule} 
+          listSeat={listSeat}
+          setSeat={setSeat}
+          listNameSeat={listNameSeat}
+          setNameSeat={setNameSeat}
         />
 
       </SeatsOption>

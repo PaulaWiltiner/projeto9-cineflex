@@ -3,15 +3,20 @@ import Header from '../../components/Header'
 import Resume from '../../components/SuccessComponents/Resume'
 import { Link } from "react-router-dom";
 
-export default function SuccessPage() {
+export default function SuccessPage({form,name,time ,listNameSeat }) {
 
   return(
     <>
       <Header />
       <Titulo>Pedido feito com sucesso!</Titulo>
-      <Resume />
+      <Resume 
+         form={form}  
+         name={name} 
+         time={time} 
+         listNameSeat={listNameSeat} 
+      />
       <DivButton>
-        <Link to='/homepage' ><Button>Voltar pra Home</Button></Link>
+        <Link to='/' ><Button>Voltar pra Home</Button></Link>
       </DivButton>
     </>
   )

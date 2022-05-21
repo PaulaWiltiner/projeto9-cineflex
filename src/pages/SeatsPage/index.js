@@ -3,68 +3,112 @@ import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import Form from '../../components/SeatsComponents/Form'
 import Seats from '../../components/SeatsComponents/Seats'
-import { Link } from "react-router-dom";
+import SuccessPage from '../SuccessPage'
 import { useState } from 'react';
 import loading from '../../assets/loading.gif';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
-function ComponentsSeats(){
+
+function Submit({form,listSeat,setChangePage}){
+  const data={
+    ids:listSeat,
+    name:form.name,
+    cpf:form.cpf
+  };
+  const promise = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", data);
+
+  promise.then(()=> {
+    setChangePage(false)
+  })
+}
+
+function ComponentsSeats({form,setForm,listSeat,setChangePage}){
 
   return(
     <>
 
-    <Form />
-    <Link to='/successpage' >
-      <Button>Reservar assento(s)</Button>
-    </Link>
+    <Form form={form} setForm={setForm}/>
+    <Button onClick={()=>Submit({form,listSeat,setChangePage})}>Reservar assento(s)</Button>
 
     </>
   )
 }
 
+
 export default function SeatsPage() {
 
   const {idSession} = useParams();
+
+  const [form, setForm] = useState({
+    name: '',
+    cpf: '',
+
+  });
 
   const [load, setLoad] = useState(true);
   const [nameMovie,setNameMovie]=useState('');
   const [URL,setURLMovie]=useState('');
   const [schedule,setSchedule]=useState({day:'',schedule:''});
+  const [listSeat, setSeat] = useState([]);
+  const [listNameSeat, setNameSeat] = useState([]);
+  const [changePage, setChangePage] = useState(true);
    
-  console.log(nameMovie,URL)
-
+ 
   return(
     <> 
-      <Header />
-      <Titulo>Selecione o(s) assento(s)</Titulo>
-      
-      <SeatsChoice>
+      {changePage ? 
+           <>
+            <Header />
+            <Titulo>Selecione o(s) assento(s)</Titulo>
+            
+            <SeatsChoice>
+              
+              <Seats 
+                idApiSession={idSession} 
+                statusLoad={setLoad} 
+                setName={setNameMovie} 
+                setImg={setURLMovie} 
+                setDay={setSchedule} 
+                loadStatus={load}
+                listSeat={listSeat}
+                setSeat={setSeat}
+                listNameSeat={listNameSeat}
+                setNameSeat={setNameSeat}
+              />
+              
         
-        <Seats 
-          idApiSession={idSession} 
-          statusLoad={setLoad} 
-          setName={setNameMovie} 
-          setImg={setURLMovie} 
-          setDay={setSchedule} 
-          loadStatus={load}
-        />
-        
-  
-        {load ? 
-          <Loading>
-            <img src={loading} alt=''/> 
-          </Loading>
-          : 
-          <ComponentsSeats />
-        }
+              {load ? 
+                <Loading>
+                  <img src={loading} alt=''/> 
+                </Loading>
+                : 
+                <ComponentsSeats 
+                  form={form} 
+                  setForm={setForm} 
+                  listSeat={listSeat}
+                  setChangePage={setChangePage}
+                />
+              }
 
-      </SeatsChoice>
+            </SeatsChoice>
 
-      <Footer 
-        name={nameMovie} 
-        time={schedule} 
-        posterURL={URL}
-      />
+            <Footer 
+              name={nameMovie} 
+              time={schedule} 
+              posterURL={URL}
+            />
+          </>
+            : 
+            
+            <SuccessPage 
+              form={form}  
+              name={nameMovie} 
+              time={schedule} 
+              listNameSeat={listNameSeat} 
+            />
+            
+            }
 
     </>
 )

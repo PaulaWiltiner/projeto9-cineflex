@@ -1,28 +1,29 @@
 import styled from 'styled-components';
 
-export default function Resume() {
+export default function Resume({form,name,time ,listNameSeat }) {
 
   return(
     <>
       <TextSuccess>
           <h2>Filme e sessão</h2>
           <div>
-            <p>Enola Homes</p>
-            <p>24/06/2021 15:00</p>
+            <p>{name}</p>
+            <p>{time.day} {time.schedule}</p>
           </div>
         </TextSuccess>
         <TextSuccess>
           <h2>Ingressos</h2>
           <div>
-            <p>Assento 15</p>
-            <p>Assento 16</p>
+            {listNameSeat.map((elem) => 
+              <p>Assento {elem}</p>
+            )}
           </div>
         </TextSuccess>
         <TextSuccess>
           <h2>Comprador</h2>
           <div>
-            <p>Nome: João da Silva Sauro</p>
-            <p>CPF: 123.456.789-10</p>
+            <p>Nome: {form.name}</p>
+            <p>CPF: {form.cpf}</p>
           </div>
         </TextSuccess>
       </>

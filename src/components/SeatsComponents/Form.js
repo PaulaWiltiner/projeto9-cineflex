@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import React from 'react';
 
-export default function Form() {
+export default function Form({form,setForm}) {
 
   function handleForm (e) {
     setForm({
@@ -11,11 +10,6 @@ export default function Form() {
 
   }
 
-  const [form, setForm] = React.useState({
-    name: '',
-    cpf: '',
-
-  });
 
   return(
     <DivForm>
@@ -24,9 +18,9 @@ export default function Form() {
         <input 
           type="text" 
           placeholder='Digite o seu nome...' 
-          name="description" 
+          name="name" 
           onChange={handleForm} 
-          value={form.description}
+          value={form.name}
         />
       </DivInput>
       <DivInput>
@@ -34,9 +28,9 @@ export default function Form() {
         <input 
           placeholder='Digite o seu CPF...'
           type="text" 
-          name="name" 
+          name="cpf" 
           onChange={handleForm} 
-          value={form.name}
+          value={form.cpf}
         />
       </DivInput>
     </DivForm>
