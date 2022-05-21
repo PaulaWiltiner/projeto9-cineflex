@@ -150,6 +150,7 @@ const ButtonSeat = styled.button`
   margin-left:8px;
   font-size:10px;
 	text-align:center;
+	padding:1px;
   color: #000000;
 
   background-color: ${props => props.color};

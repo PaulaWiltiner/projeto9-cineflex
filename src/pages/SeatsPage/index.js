@@ -130,7 +130,7 @@ const SeatsChoice = styled.div`
   align-items:center;
   padding: 0px 28px 0px 22px;
   margin-top:-2em;
-  margin-bottom:40px;
+  margin-bottom:140px;
 `
 
 
